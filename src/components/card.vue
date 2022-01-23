@@ -1,14 +1,19 @@
 <template>
-    <div class="px-10">
-      <div class="card bg-white max-w-xl rounded-2xl px-10 py-5 shadow-lg hover:shadow-2xl transition duration-500">
+    <div id="card-wrapper" >
+      <div class="card bg-white max-w-xl rounded-2xl px-10 py-5 shadow-lg hover:shadow-2xl transition duration-500 ">
         <div class="mt-4 flex flex-col h-full justify-between">
           <div>
             <!--german  -->
             <h1 id="german-card-word" class="german-card-word text-lg text-gray-700 font-semibold hover:underline cursor-pointer">
+              {{word.german}}
             </h1>
             <!-- turkish -->
-            <h2 id="turkish-card-word" class="turkish-card-word text-md text-red-500 hover:underline cursor-pointer hidden"></h2>
-            <p class="sentence-card-word mt-4 text-md text-gray-600"></p>
+            <h2 id="turkish-card-word" class="turkish-card-word text-md text-red-500 hover:underline cursor-pointer">
+              {{word.turkish}}
+            </h2>
+            <p class="sentence-card-word mt-4 text-md text-gray-600">
+              {{word.sentence}}
+            </p>
             <div class="flex justify-start items-start mt-3">
               <div id="rating-card" class="rating-card mt-2 w-1/4"></div>
               <div id="falseAlert" class="p-3 ml-10 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800 hidden" role="alert">
@@ -39,8 +44,20 @@
 
 <script>
 export default {
-    setup(){
-        
+    props:{word:Object},
+    setup(props){
+      console.log('props.word :>> ', props.word);
     }
 }
 </script>
+
+<style>
+#card-wrapper{
+  width: 450px;
+  margin: 1rem;
+}
+.card{
+  height: 250px;
+  padding: 1rem;
+}
+</style>
