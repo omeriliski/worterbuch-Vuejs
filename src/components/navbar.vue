@@ -73,6 +73,7 @@ import { BellIcon, MenuIcon, XIcon } from '@heroicons/vue/outline'
 import { useAuthState } from '../firebase';
 import { getAuth, signOut } from 'firebase/auth'
 import { useRouter } from 'vue-router'
+import {useStore} from 'vuex';
 const navigation = [
   { name: 'HomePage', href: '/', current: true },
   { name: 'CheckPage', href: '/check', current: false }
@@ -93,8 +94,10 @@ export default {
   },
   setup() {
     const { user } = useAuthState()
+    console.log('navbar user :>> ', user);
+    const store = useStore()
+    store.state.user=user;
     const auth = getAuth()
-
     const router = useRouter()
     const signOutUser = async () => {
       try {

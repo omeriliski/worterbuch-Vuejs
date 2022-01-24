@@ -33,5 +33,5 @@ export const useAuthState = () => {
 
   const isAuthenticated = computed(() => user.value != null)
 
-  return { user, error, isAuthenticated }
+  return {user, error, isAuthenticated }
 }

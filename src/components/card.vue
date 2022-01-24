@@ -53,7 +53,7 @@ export default {
 
 <style>
 #card-wrapper{
-  width: 450px;
+  width: 600px;
   margin: 1rem;
 }
 .card{

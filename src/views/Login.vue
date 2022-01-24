@@ -96,7 +96,7 @@
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'vue-router'
 import { LockClosedIcon } from '@heroicons/vue/solid'
-
+// import {useStore} from 'vuex';
 export default {
   components: {
     LockClosedIcon,
@@ -104,15 +104,18 @@ export default {
   setup() {
     const auth = getAuth()
     const router = useRouter()
-
-    const handleSubmit = async e => {
+    // const store = useStore()
+    const handleSubmit = e => {
       const { email, password } = e.target.elements
-      try {
-        await signInWithEmailAndPassword(auth, email.value, password.value)
-        router.push('/')
-      } catch (e) {
-        alert(e.message)
-      }
+      signInWithEmailAndPassword(auth, email.value, password.value)
+        .then(()=>{
+          //store.state.user=auth.currentUser;
+          router.push('/')
+        })
+        .catch (e=>{
+          alert(e.message)
+      }) 
+      
     }
 
     return { handleSubmit }

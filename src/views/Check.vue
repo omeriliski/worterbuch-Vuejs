@@ -1,58 +1,64 @@
 <template>
-    <div class="">
-        <Navbar class="w-full"/>
-        <div class="card-wrapper w-1/3 flex justify-between items-center relative">
-            <img @click="getPreviousCard" class="arrow" src="../assets/left-arrow.png" alt="">
-            <Card class="absolute card" :word="wordList[current]"/>
-            <img @click="getNextCard" class="arrow" src="../assets/right-arrow.png" alt="">
-        </div>
+  <div class=" bg-slate-500 h-screen">
+    <Navbar />
+    <div class=" mt-40">
+    <Carousel :itemsToShow="1" :wrapAround="true">
+      <Slide v-for="current in wordList.length-1" :key="current">
+        <Card class="card" :word="wordList[current]" />
+
+        <!-- <div class="carousel__item">{{ slide }}</div> -->
+      </Slide>
+    </Carousel>
     </div>
+  </div>
 </template>
 
 <script>
-import Navbar from "../components/navbar.vue";
-import Card from '../components/card.vue';
+import { Carousel, Slide } from 'vue3-carousel'
+import Navbar from '../components/navbar.vue'
+import Card from '../components/card.vue'
+import 'vue3-carousel/dist/carousel.css'
 import { computed } from '@vue/runtime-core';
 import {useStore} from 'vuex';
 import {ref} from "vue"
 export default {
-    components:{Navbar,Card},
+    components:{Navbar,Card,Carousel,Slide},
     setup(){
         const current=ref(0)
         const store = useStore()
         store.commit("getData")
-        const getPreviousCard = ()=>{
-            if(current.value>0) current.value--
-            console.log('current.value :>> ', current.value);
-        }
-        const getNextCard = ()=>{
-            if(current.value<store.getters.wordList.length-1) current.value++
-            console.log('wordList.length :>> ', store.getters.wordList.length-1);
-            console.log('current.value :>> ', current.value);
-        }
+        // const getPreviousCard = ()=>{
+        //     if(current.value>0) current.value--
+        // }
+        // const getNextCard = ()=>{
+        //     if(current.value<store.getters.wordList.length-1) current.value++
+        //     console.log('wordList.length :>> ', store.getters.wordList.length-1);
+        // }
         const wordList=computed(()=>{ 
             return store.getters.wordList
       })
-      return {wordList,current,getPreviousCard,getNextCard}
+      return {wordList,current}
     }
 }
 </script>
 
-<style>
-    .card-wrapper{
-        margin: auto;
-        /* border:1px solid red; */
-        height: 90vh;
-    }
-    .arrow{
-        width: 4rem;
-        height: 4rem;
-    }
-    .arrow:hover{
-        cursor: pointer;
-    }
-    .card{
-        left: 5rem;
-    }
+<style scoped>
+.carousel__slide > .carousel__item {
+  transform: scale(1);
+  opacity: 0.5;
+  transition: 0.5s;
+}
+.carousel__slide--visible > .carousel__item {
+  opacity: 1;
+  transform: rotateY(0);
+}
+.carousel__slide--next > .carousel__item {
+  transform: scale(0.9) translate(-10px);
+}
+.carousel__slide--prev > .carousel__item {
+  transform: scale(0.9) translate(10px);
+}
+.carousel__slide--active > .carousel__item {
+  transform: scale(1.1);
+}
 </style>
-

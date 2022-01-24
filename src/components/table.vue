@@ -1,32 +1,35 @@
 <template>
 <!-- This example requires Tailwind CSS v2.0+ -->
-<div class="flex flex-col mt-10">
-  <div class="-my-2 overflow-x-auto sm:-mx-10 lg:-mx-20">
-    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-        <table class="min-w-full divide-y divide-gray-200">
+<div class=" flex flex-col mt-10">
+  <div class="-my-2 flex justify-center">
+    <div class="w-11/12 py-2 align-middle inline-block  sm:px-6 lg:px-4">
+      <div class="tableDiv shadow overflow-y-auto border-b border-gray-200 sm:rounded-lg">
+        <table class="divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
-              <th scope="col" class="w-1/6 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th scope="col" class="w-2/12 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Deutsch 
                 <svg @click="sortWords('german')" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
               </th>
-              <th scope="col" class="w-1/6 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th scope="col" class="w-2/12 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Turkisch
                 <svg @click="sortWords('turkish')" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
               </th>
-              <th scope="col" class="w-1/3 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th scope="col" class=" w-5/12 sentence px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Beispiel Satz
               </th>
-              <th scope="col" class="w-1/6 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th scope="col" class="w-1/12 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Lernniveau
               </th>
-              <th scope="col" class="relative px-6 py-3">
+              <th scope="col" class=" w-1/12 px-6 py-3">
                 <span class="sr-only">Edit</span>
+              </th>
+              <th scope="col" class=" w-1/12 px-6 py-3">
+                <span class="sr-only">Delete</span>
               </th>
             </tr>
           </thead>
@@ -40,14 +43,17 @@
               <td class="px-6 py-4 whitespace-nowrap">
                 {{word.turkish}}
               </td>
-              <td class="px-6 py-4 whitespace-nowrap">
+              <td class="sentence py-4">
                 {{word.sentence}}
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <td class=" px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                 
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                 <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <a href="#" class="text-indigo-600 hover:text-indigo-900">Delete</a>
               </td>
             </tr>
             <!-- More people... -->
@@ -65,6 +71,7 @@ import { useStore } from 'vuex';
 export default {
   setup(){
     const store = useStore()
+    
     store.commit("getData") 
     const wordList=computed(()=>{ 
        return store.getters.wordList
@@ -77,3 +84,15 @@ export default {
 }
 
 </script>
+
+<style>
+  .tableDiv{
+    height: 70vh;
+  }
+  .sentence{
+    }
+  .table-wrapper {
+    width: 50vw;
+    background: red;
+  }
+</style>

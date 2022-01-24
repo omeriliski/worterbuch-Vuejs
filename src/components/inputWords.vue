@@ -1,5 +1,5 @@
 <template>
-    <div class=" mt-10 px-10">
+    <div class=" mt-10 w-11/12 m-auto">
         <div class="flex justify-between">
             <input v-model="german" class="pl-2 p-1 border border-indigo-600 rounded mr-5 w-1/6" placeholder="deutsch..." type="text" name="" id="german">
             <input v-model="turkish" class="pl-2 p-1 border border-indigo-600 rounded mr-5 w-1/6" type="text" placeholder="turkisch..." name="" id="turkish">
@@ -30,7 +30,8 @@ export default {
             turkish.value="",
             sentence.value="";
             console.log('word :>> ', word);
-            store.commit("saveWordData",word)
+            store.state.wordList.push(word);
+            store.commit("saveWordData")
         }
         return{german,turkish,sentence,saveWord}
     }
