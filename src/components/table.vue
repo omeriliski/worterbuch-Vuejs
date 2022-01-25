@@ -49,11 +49,11 @@
               <td class=" px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                 
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+              <td @click="editWord(word)" class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                 <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <a href="#" class="text-indigo-600 hover:text-indigo-900">Delete</a>
+                <a href="#" @click="deleteWord()" class="text-indigo-600 hover:text-indigo-900">Delete</a>
               </td>
             </tr>
             <!-- More people... -->
@@ -69,9 +69,9 @@
 import { computed } from '@vue/runtime-core';
 import { useStore } from 'vuex';
 export default {
+  
   setup(){
     const store = useStore()
-    
     store.commit("getData") 
     const wordList=computed(()=>{ 
        return store.getters.wordList
@@ -79,7 +79,15 @@ export default {
     const sortWords = (column) => {
       store.commit("sortWords",column)
     }
-    return{wordList,sortWords}
+    const deleteWord=(word)=>{
+      store.state.wordList = store.getters.wordList.filter((e)=>e.id!=word.id)
+      store.commit("saveWordData");
+    }
+    // to send this emit to the parent (home) component
+    // const editWord=(word)=>{
+    //   emit("editWord",word)
+    // }
+    return{wordList,sortWords,deleteWord}
   }
 }
 

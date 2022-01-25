@@ -102,6 +102,7 @@ export default {
     const signOutUser = async () => {
       try {
         await signOut(auth)
+        store.state.wordList=[];
         router.push('/login')
       } catch (e) {
         alert(e.message)

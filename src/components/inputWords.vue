@@ -13,12 +13,16 @@
 import {useStore} from "vuex"
 import {ref} from 'vue'
 export default {
+    props:{
+        word:Object
+    },
     setup() {
         const store=useStore();
         const german=ref("");
         const turkish=ref("");
         const sentence=ref("");
-
+        // const editWordtoWatch=ref(props.word)
+        // watch(editWordtoWatch,(word) => console.log('edit Input!!!!!!!!!!!!!!!!!!!!! :>> ', word))
         const saveWord=()=>{
             const word={
                 german:german.value,

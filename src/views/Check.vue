@@ -3,8 +3,8 @@
     <Navbar />
     <div class=" mt-40">
     <Carousel :itemsToShow="1" :wrapAround="true">
-      <Slide v-for="current in wordList.length-1" :key="current">
-        <Card class="card" :word="wordList[current]" />
+      <Slide v-for="current in wordList.length" :key="current">
+        <Card class="card" :word="wordList[current-1]" />
 
         <!-- <div class="carousel__item">{{ slide }}</div> -->
       </Slide>

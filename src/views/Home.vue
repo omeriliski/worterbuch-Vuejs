@@ -11,13 +11,19 @@
 import Table from "../components/table.vue";
 import Navbar from "../components/navbar.vue";
 import InputWords from "../components/inputWords.vue";
+// import {reactive} from "vue"
 export default {
   name: 'Home',
   components:{Navbar,InputWords,Table},
   setup() {
+    // let editedWord = reactive("");
+    // const editWord = (word)=> {
+    //   editedWord = word;
+    //   console.log('editedWord :>> ', editedWord);
+    // }
+    // return {editWord}
   }
 }
 </script>
 <style>
-  
 </style>

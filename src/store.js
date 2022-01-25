@@ -18,14 +18,14 @@ function sortDataAZ(prop){
 const store = createStore({
     state: {
         wordList: [],
-        user:null
+        user:null,
     },
     getters: {
         wordList: state => state.wordList,
     },
     mutations: {
         async getData(state) {
-            if(state.wordList.length==0){
+            // if(state.wordList.length==0){
                 // const { user } = useAuthState()
                 const auth = getAuth()
                 console.log('Store user :>> ', auth.currentUser);
@@ -38,7 +38,7 @@ const store = createStore({
                     // doc.data() will be undefined in this case
                     console.log("No such document!");
                   }
-            }
+            // }
             state.wordList.sort(sortDataAZ("german"));
         },
         async saveWordData(state){
