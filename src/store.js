@@ -3,6 +3,7 @@ import {getFirestore} from "firebase/firestore";
 import {collection,getDoc,doc,setDoc} from "firebase/firestore";
 // import { useAuthState } from './firebase';
 import { getAuth } from 'firebase/auth'
+import {ref} from 'vue'
 const db = getFirestore();
 
 function sortDataAZ(prop){
@@ -19,6 +20,11 @@ const store = createStore({
     state: {
         wordList: [],
         user:null,
+        german:ref(""),
+        turkish:ref(""),
+        sentence:ref(""),
+        isDisabled:ref(""),
+        isEditEnable:ref(true)
     },
     getters: {
         wordList: state => state.wordList,
@@ -45,7 +51,9 @@ const store = createStore({
             const wordsRef = collection(db, "words");
             //wordsRef, doc Id, data Obj
             console.log('state.user :>> ', state.user);
+            state.isDisabled="";
             await setDoc(doc(wordsRef, `${state.user.uid}`),{wordList:state.wordList});
+            state.isEditEnable=true;
         },
         sortWords(state,column){
             state.wordList.sort(sortDataAZ(column));

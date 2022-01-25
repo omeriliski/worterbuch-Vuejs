@@ -49,11 +49,11 @@
               <td class=" px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                 
               </td>
-              <td @click="editWord(word)" class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+              <td @click="editWord(word)"   class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <button :class="$store.state.isDisabled" class="text-indigo-600 hover:text-indigo-900">Edit</button>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <a href="#" @click="deleteWord()" class="text-indigo-600 hover:text-indigo-900">Delete</a>
+                <button :class="$store.state.isDisabled" @click="deleteWord(word)" class="text-indigo-600 hover:text-indigo-900">Delete</button>
               </td>
             </tr>
             <!-- More people... -->
@@ -72,6 +72,7 @@ export default {
   
   setup(){
     const store = useStore()
+    
     store.commit("getData") 
     const wordList=computed(()=>{ 
        return store.getters.wordList
@@ -80,14 +81,27 @@ export default {
       store.commit("sortWords",column)
     }
     const deleteWord=(word)=>{
-      store.state.wordList = store.getters.wordList.filter((e)=>e.id!=word.id)
-      store.commit("saveWordData");
+      if(store.state.isEditEnable==true){
+        console.log('store.state.wordList :>> ', store.state.wordList);
+        store.state.wordList = store.getters.wordList.filter((e)=>e.id!=word.id)
+        store.commit("saveWordData");
+      }
     }
+    const editWord=(word=>{
+      if(store.state.isEditEnable==true){
+        store.state.german=word.german;
+        store.state.turkish=word.turkish;
+        store.state.sentence=word.sentence;
+        store.state.isDisabled="disabled-link";
+        store.state.wordList = store.getters.wordList.filter((e)=>e.id!=word.id)
+        store.state.isEditEnable=false;
+      }
+    })
     // to send this emit to the parent (home) component
     // const editWord=(word)=>{
     //   emit("editWord",word)
     // }
-    return{wordList,sortWords,deleteWord}
+    return{wordList,sortWords,deleteWord,editWord}
   }
 }
 
@@ -102,5 +116,11 @@ export default {
   .table-wrapper {
     width: 50vw;
     background: red;
+  }
+  .disabled-link{
+    color: #ddd;
+    /* cursor:no-drop;  */
+    /* cursor: not-allowed; */
+    pointer-events: none;
   }
 </style>

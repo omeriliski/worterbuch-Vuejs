@@ -16,12 +16,6 @@ export default {
   name: 'Home',
   components:{Navbar,InputWords,Table},
   setup() {
-    // let editedWord = reactive("");
-    // const editWord = (word)=> {
-    //   editedWord = word;
-    //   console.log('editedWord :>> ', editedWord);
-    // }
-    // return {editWord}
   }
 }
 </script>

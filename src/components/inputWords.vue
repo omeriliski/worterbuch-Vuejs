@@ -1,9 +1,9 @@
 <template>
     <div class=" mt-10 w-11/12 m-auto">
         <div class="flex justify-between">
-            <input v-model="german" class="pl-2 p-1 border border-indigo-600 rounded mr-5 w-1/6" placeholder="deutsch..." type="text" name="" id="german">
-            <input v-model="turkish" class="pl-2 p-1 border border-indigo-600 rounded mr-5 w-1/6" type="text" placeholder="turkisch..." name="" id="turkish">
-            <input v-model="sentence" class="pl-2 p-1 border border-indigo-600 rounded mr-5 w-1/2" type="text" placeholder="beispiel Satz..." name="" id="sentence">
+            <input v-model="$store.state.german" class="pl-2 p-1 border border-indigo-600 rounded mr-5 w-1/6" placeholder="deutsch..." type="text" name="" id="german">
+            <input v-model="$store.state.turkish" class="pl-2 p-1 border border-indigo-600 rounded mr-5 w-1/6" type="text" placeholder="turkisch..." name="" id="turkish">
+            <input v-model="$store.state.sentence" class="pl-2 p-1 border border-indigo-600 rounded mr-5 w-1/2" type="text" placeholder="beispiel Satz..." name="" id="sentence">
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded lg:\mt-6" @click="saveWord">Save</button>
         </div>
     </div>
@@ -11,33 +11,32 @@
 
 <script>
 import {useStore} from "vuex"
-import {ref} from 'vue'
+
 export default {
     props:{
         word:Object
     },
     setup() {
         const store=useStore();
-        const german=ref("");
-        const turkish=ref("");
-        const sentence=ref("");
+       
         // const editWordtoWatch=ref(props.word)
         // watch(editWordtoWatch,(word) => console.log('edit Input!!!!!!!!!!!!!!!!!!!!! :>> ', word))
         const saveWord=()=>{
             const word={
-                german:german.value,
-                turkish:turkish.value,
-                sentence:sentence.value,
+                german:store.state.german,
+                turkish:store.state.turkish,
+                sentence:store.state.sentence,
+                rating:0,
                 id:Date.now()
             }
-            german.value="";
-            turkish.value="",
-            sentence.value="";
+            store.state.german="";
+            store.state.turkish="",
+            store.state.sentence="";
             console.log('word :>> ', word);
             store.state.wordList.push(word);
             store.commit("saveWordData")
         }
-        return{german,turkish,sentence,saveWord}
+        return{saveWord}
     }
 }
 </script>

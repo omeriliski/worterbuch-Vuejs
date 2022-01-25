@@ -25,6 +25,12 @@ const routes = [
     name: 'SignUp',
     component: () => import('../views/SignUp.vue'),
     meta: { requiresUnauth: true }
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import('../views/Profile.vue'),
+    meta: { requiresAuth: true }
   }
 ]
 
