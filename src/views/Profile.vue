@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="bg-gray-100 h-screen"> 
     <Navbar />
-    <div class="bg-gray-100">
+    <div >
       <!-- End of Navbar -->
 
       <div class="container mx-auto p-5">
@@ -11,23 +11,14 @@
             <!-- Profile Card -->
             <div class="bg-white p-3 border-t-4 border-green-400">
               <div class="image overflow-hidden">
-                <img
-                  class="h-auto w-full mx-auto"
-                  src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg"
-                  alt=""
-                />
+                <img class="h-96 w-full mx-auto" src="https://scontent-muc2-1.xx.fbcdn.net/v/t1.18169-9/10382757_1378596799130428_5309769796455625867_n.jpg?_nc_cat=107&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=kpurWcSy_ygAX-s6GlQ&_nc_ht=scontent-muc2-1.xx&oh=00_AT-zozZosTaybl52kVXYLD1Rn0WYy9Sriv_tJWpP_7Kx4Q&oe=6215CA7F" alt="" />
               </div>
+              <div class="mt-4 flex justify-between">
               <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">
                 Jane Doe
               </h1>
-              <h3 class="text-gray-600 font-lg text-semibold leading-6">
-                Owner at Her Company Inc.
-              </h3>
-              <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Reprehenderit, eligendi dolorum sequi illum qui unde aspernatur
-                non deserunt
-              </p>
+              <button class=" relative py-1 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none">Upload Your Picture</button>
+              </div>
               <ul
                 class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm"
               >
@@ -49,7 +40,7 @@
             <!-- End of profile card -->
             <div class="my-4"></div>
             <!-- Friends card -->
-            <div class="bg-white p-3 hover:shadow">
+            <!-- <div class="bg-white p-3 hover:shadow">
               <div
                 class="flex items-center space-x-3 font-semibold text-gray-900 text-xl leading-8"
               >
@@ -105,7 +96,7 @@
                   <a href="#" class="text-main-color">Casey</a>
                 </div>
               </div>
-            </div>
+            </div> -->
             <!-- End of friends card -->
           </div>
           <!-- Right Side -->
@@ -145,46 +136,31 @@
                     <div class="px-4 py-2">Doe</div>
                   </div>
                   <div class="grid grid-cols-2">
-                    <div class="px-4 py-2 font-semibold">Gender</div>
-                    <div class="px-4 py-2">Female</div>
+                    <div class="px-4 py-2 font-semibold">First Language</div>
+                    <div class="px-4 py-2"></div>
                   </div>
                   <div class="grid grid-cols-2">
-                    <div class="px-4 py-2 font-semibold">Contact No.</div>
-                    <div class="px-4 py-2">+11 998001001</div>
-                  </div>
-                  <div class="grid grid-cols-2">
-                    <div class="px-4 py-2 font-semibold">Current Address</div>
-                    <div class="px-4 py-2">Beech Creek, PA, Pennsylvania</div>
-                  </div>
-                  <div class="grid grid-cols-2">
-                    <div class="px-4 py-2 font-semibold">Permanant Address</div>
-                    <div class="px-4 py-2">Arlington Heights, IL, Illinois</div>
+                    <div class="px-4 py-2 font-semibold">
+                      Second (target) Language
+                    </div>
+                    <div class="px-4 py-2"></div>
                   </div>
                   <div class="grid grid-cols-2">
                     <div class="px-4 py-2 font-semibold">Email.</div>
                     <div class="px-4 py-2">
                       <a class="text-blue-800" href="mailto:jane@example.com"
-                        >jane@example.com</a
+                        >{{state?.user?.email}}</a
                       >
                     </div>
                   </div>
-                  <div class="grid grid-cols-2">
-                    <div class="px-4 py-2 font-semibold">Birthday</div>
-                    <div class="px-4 py-2">Feb 06, 1998</div>
-                  </div>
                 </div>
               </div>
-              <button
-                class="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4"
-              >
-                Show Full Information
-              </button>
             </div>
             <!-- End of about section -->
 
             <div class="my-4"></div>
 
-            <!-- Experience and education -->
+            <!-- Informations About Your Vocabulary -->
             <div class="bg-white p-3 shadow-sm rounded-sm">
               <div class="grid grid-cols-2">
                 <div>
@@ -207,27 +183,76 @@
                         />
                       </svg>
                     </span>
-                    <span class="tracking-wide">Experience</span>
+                    <span class="tracking-wide"
+                      >Informations About Your Vocabulary</span
+                    >
                   </div>
-                  <ul class="list-inside space-y-2">
-                    <li>
-                      <div class="text-teal-600">Owner at Her Company Inc.</div>
-                      <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                    </li>
-                    <li>
-                      <div class="text-teal-600">Owner at Her Company Inc.</div>
-                      <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                    </li>
-                    <li>
-                      <div class="text-teal-600">Owner at Her Company Inc.</div>
-                      <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                    </li>
-                    <li>
-                      <div class="text-teal-600">Owner at Her Company Inc.</div>
-                      <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                    </li>
-                  </ul>
+                  <div>
+                    <ul class="list-inside space-y-2">
+                        <li>
+                          <div class="text-teal-600">Your Total Words:</div>
+                          <div class="text-gray-500 text-xs">{{state.wordList.length}}</div>
+                        </li>
+                    </ul>
+                  </div>
+                  <div class=" flex justify-between">
+                    <div>
+                      <ul class="list-inside space-y-2">
+                        
+                        <li>
+                          <div class="text-teal-600">You learned:</div>
+                          <div class="text-gray-500 text-xs">{{getRating(5)}}</div>
+                        </li>
+                        <li>
+                          <div class="text-teal-600">4 Star</div>
+                          <div class="text-gray-500 text-xs">{{getRating(4)}}</div>
+                        </li>
+                        <li>
+                          <div class="text-teal-600">3 Star</div>
+                          <div class="text-gray-500 text-xs">{{getRating(3)}}</div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <div>
+                        <ul class="list-inside space-y-2 ">
+                          
+                          <li>
+                            <div class="text-teal-600">
+                              2 Star
+                            </div>
+                            <div class="text-gray-500 text-xs">
+                              {{getRating(2)}}
+                            </div>
+                          </li>
+                          <li>
+                            <div class="text-teal-600">
+                              1 Star
+                            </div>
+                            <div class="text-gray-500 text-xs">
+                              {{getRating(1)}}
+                            </div>
+                          </li>
+                          <li>
+                            <div class="text-teal-600">
+                              Your new words
+                            </div>
+                            <div class="text-gray-500 text-xs">
+                              {{getRating(0)}}
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              </div>
+            </div>
+              <!-- End of Experience and education grid -->
+
+          <!-- Informations About Our Vocabulary Pool-->
+            <div class="bg-white p-3 shadow-sm rounded-sm mt-4">
+              <div class="grid grid-cols-2">
                 <div>
                   <div
                     class="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3"
@@ -240,37 +265,72 @@
                         viewBox="0 0 24 24"
                         stroke="currentColor"
                       >
-                        <path fill="#fff" d="M12 14l9-5-9-5-9 5 9 5z" />
-                        <path
-                          fill="#fff"
-                          d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
-                        />
                         <path
                           stroke-linecap="round"
                           stroke-linejoin="round"
                           stroke-width="2"
-                          d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
+                          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                         />
                       </svg>
                     </span>
-                    <span class="tracking-wide">Education</span>
+                    <span class="tracking-wide"
+                      >Informations About Our Vocabulary Pool</span
+                    >
                   </div>
-                  <ul class="list-inside space-y-2">
-                    <li>
-                      <div class="text-teal-600">Masters Degree in Oxford</div>
-                      <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                    </li>
-                    <li>
-                      <div class="text-teal-600">Bachelors Degreen in LPU</div>
-                      <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                    </li>
-                  </ul>
+                  <div>
+                    <ul class="list-inside space-y-2">
+                        <li>
+                          <div class="text-teal-600">Your Total Words:</div>
+                          <div class="text-gray-500 text-xs">150</div>
+                        </li>
+                    </ul>
+                  </div>
+                  <div class=" flex justify-between">
+                    <div>
+                      <ul class="list-inside space-y-2">
+                        
+                        <li>
+                          <div class="text-teal-600">You learned:</div>
+                          <div class="text-gray-500 text-xs">25</div>
+                        </li>
+                        <li>
+                          <div class="text-teal-600">4 Star</div>
+                          <div class="text-gray-500 text-xs">25</div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <div>
+                        <ul class="list-inside space-y-2 ">
+                          
+                          <li>
+                            <div class="text-teal-600">
+                              2 Star
+                            </div>
+                            <div class="text-gray-500 text-xs">
+                              25
+                            </div>
+                          </li>
+                          <li>
+                            <div class="text-teal-600">
+                              1 Star
+                            </div>
+                            <div class="text-gray-500 text-xs">
+                              25
+                            </div>
+                          </li>
+                         
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <!-- End of Experience and education grid -->
             </div>
-            <!-- End of profile tab -->
+
+
           </div>
+            <!-- End of profile tab -->
         </div>
       </div>
     </div>
@@ -279,9 +339,18 @@
 
 <script>
 import Navbar from '../components/navbar.vue'
+import { useStore } from 'vuex';
+// import { computed } from '@vue/reactivity';
+
 export default {
   components: { Navbar },
-  setup() {}
+  setup() {
+    const {state} = useStore()
+    const getRating = (rating)=>{
+      return state.wordList.filter((e)=>e.rating==rating).length
+    }
+    return{state,getRating}
+  }
 }
 </script>
 

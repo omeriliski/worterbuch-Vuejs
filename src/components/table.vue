@@ -111,8 +111,6 @@ export default {
   .tableDiv{
     height: 70vh;
   }
-  .sentence{
-    }
   .table-wrapper {
     width: 50vw;
     background: red;

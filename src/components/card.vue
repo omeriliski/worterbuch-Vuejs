@@ -9,7 +9,7 @@
             </h1>
             <!-- turkish -->
             <h2 id="turkish-card-word" class="turkish-card-word text-md text-red-500 hover:underline cursor-pointer">
-              {{word.turkish}}
+
             </h2>
             <p class="sentence-card-word mt-4 text-md text-gray-600">
               {{word.sentence}}
@@ -24,9 +24,13 @@
               </div>
             </div>
           </div>
+          <!-- <div class="flex">
+            <div v-for="i in word.turkish.length" :key="i" class="border-b-2 w-4 ml-2">
+          </div> 
+          </div>-->
           <div class="flex justify-between items-center">
             <div class="flex items-center space-x-10 pb-6">
-                <input type="text" class="input-value pl-2 p-1 border border-indigo-600 rounded" name="" id="" placeholder="bedeutung...">
+                <input type="text" class="input-value pl-2 p-1 border border-indigo-600 rounded" name="" id="input" placeholder="bedeutung...">
                 <button class="check-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 border border-blue-700 rounded lg:\mt-6">Überprüfen</button>
               <!-- <div class="">
                 <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1593104547489-5cfb3839a3b5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1036&q=80" alt="" />
@@ -59,5 +63,8 @@ export default {
 .card{
   height: 250px;
   padding: 1rem;
+}
+#input{ 
+  z-index: 10;
 }
 </style>
