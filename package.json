@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve ",
+    "start": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve ",
+    "watch":"npx tailwindcss -i ./src/assets/input.css -o ./dist/output.css --watch",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
