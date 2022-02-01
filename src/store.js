@@ -24,7 +24,11 @@ const store = createStore({
         turkish:ref(""),
         sentence:ref(""),
         isDisabled:ref(""),
-        isEditEnable:ref(true)
+        isEditEnable:ref(true),
+        showAnswer:ref(false),
+        correct:ref(false),
+        wrong:ref(false),
+        answer:ref("")
     },
     getters: {
         wordList: state => state.wordList,

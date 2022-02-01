@@ -8,19 +8,19 @@
               {{word.german}}
             </h1>
             <!-- turkish -->
-            <h2 id="turkish-card-word" class="turkish-card-word text-md text-red-500 hover:underline cursor-pointer">
-
+            <h2 v-if="$store.state.showAnswer" id="turkish-card-word" class="turkish-card-word text-md text-red-500 hover:underline cursor-pointer">
+              {{word.turkish}}
             </h2>
             <p class="sentence-card-word mt-4 text-md text-gray-600">
               {{word.sentence}}
             </p>
             <div class="flex justify-start items-start mt-3">
               <div id="rating-card" class="rating-card mt-2 w-1/4"></div>
-              <div id="falseAlert" class="p-3 ml-10 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800 hidden" role="alert">
+              <div v-if="$store.state.wrong"  id="falseAlert" class="p-3 ml-10 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
                 <span class="font-medium">Falsch!</span> <i class="far fa-frown text-xl ml-5"></i>
               </div>
-              <div id="rightAlert" class="p-3 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800 hidden" role="alert">
-                <span class="font-medium">Richtig!</span><i class="far fa-smile text-xl ml-5"></i>
+              <div v-if="$store.state.correct" id="rightAlert" class="p-3 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
+                <span  class="font-medium">Richtig!</span><i class="far fa-smile text-xl ml-5"></i>
               </div>
             </div>
           </div>
@@ -30,8 +30,8 @@
           </div>-->
           <div class="flex justify-between items-center">
             <div class="flex items-center space-x-10 pb-6">
-                <input type="text" class="input-value pl-2 p-1 border border-indigo-600 rounded" name="" id="input" placeholder="bedeutung...">
-                <button class="check-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 border border-blue-700 rounded lg:\mt-6">Überprüfen</button>
+                <input v-model="$store.state.answer" type="text" class="input-value pl-2 p-1 border border-indigo-600 rounded" name="" id="input" placeholder="bedeutung...">
+                <button @click="compare" class="check-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 border border-blue-700 rounded lg:\mt-6">Überprüfen</button>
               <!-- <div class="">
                 <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1593104547489-5cfb3839a3b5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1036&q=80" alt="" />
               </div> -->
@@ -47,10 +47,21 @@
 </template>
 
 <script>
+import {useStore} from 'vuex';
 export default {
-    props:{word:Object},
+    props:{word:Object, showAnswer:Boolean},
     setup(props){
-      console.log('props.word :>> ', props.word);
+      
+      const {state} = useStore()
+      const compare = ()=>{
+        state.showAnswer = true;
+        console.log('props.showAnswer :>> ',state.showAnswer);
+        // console.log('showAntwort :>> ', showAnswer.value);
+        if(state.answer == props.word.turkish) state.correct=true
+        else state.wrong=true;
+      }
+      //const showAnswer = computed(()=>props.showAnswer)
+      return {compare}
     }
 }
 </script>
@@ -62,7 +73,7 @@ export default {
 .card{
   /* margin: auto; */
   /* width:100%; */
-  height: 250px;
+  height: 300px;
   padding: 1rem;
 }
 #input{ 
