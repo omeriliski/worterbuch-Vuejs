@@ -9,13 +9,13 @@
             <tr>
               <th scope="col" class="w-2/12 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Deutsch 
-                <svg @click="sortWords('german')" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg @click="sortWords('targetLanguage')" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
               </th>
               <th scope="col" class="w-2/12 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Turkisch
-                <svg @click="sortWords('turkish')" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg @click="sortWords('firstLanguage')" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
               </th>
@@ -37,11 +37,11 @@
             <tr v-for="word in wordList" :key="word">
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="flex items-center">
-                  {{word.german}}
+                  {{word.targetLanguage}}
                 </div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                {{word.turkish}}
+                {{word.firstLanguage}}
               </td>
               <td class="sentence py-4">
                 {{word.sentence}}
@@ -89,8 +89,8 @@ export default {
     }
     const editWord=(word=>{
       if(store.state.isEditEnable==true){
-        store.state.german=word.german;
-        store.state.turkish=word.turkish;
+        store.state.targetLanguage=word.targetLanguage;
+        store.state.firstLanguage=word.firstLanguage;
         store.state.sentence=word.sentence;
         store.state.isDisabled="disabled-link";
         store.state.wordList = store.getters.wordList.filter((e)=>e.id!=word.id)

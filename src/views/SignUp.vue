@@ -85,7 +85,7 @@ export default {
       const { email, password1 } = e.target.elements
       try {
         await createUserWithEmailAndPassword(auth, email.value, password1.value)
-        router.push('/')
+        router.push('/settings')
       } catch (e) {
         alert(e.message)
       }

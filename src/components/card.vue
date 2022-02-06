@@ -3,13 +3,13 @@
       <div class="card bg-white max-w-xl rounded-2xl px-10 py-5 shadow-lg hover:shadow-2xl transition duration-500 ">
         <div class="mt-4 flex flex-col h-full justify-between">
           <div>
-            <!--german  -->
-            <h1 id="german-card-word" class="german-card-word text-lg text-gray-700 font-semibold hover:underline cursor-pointer">
-              {{word.german}}
+            <!--targetLanguage  -->
+            <h1 id="targetLanguage-card-word" class="targetLanguage-card-word text-lg text-gray-700 font-semibold hover:underline cursor-pointer">
+              {{word.targetLanguage}}
             </h1>
-            <!-- turkish -->
-            <h2 v-if="$store.state.showAnswer" id="turkish-card-word" class="turkish-card-word text-md text-red-500 hover:underline cursor-pointer">
-              {{word.turkish}}
+            <!-- firstLanguage -->
+            <h2 v-if="$store.state.showAnswer" id="firstLanguage-card-word" class="firstLanguage-card-word text-md text-red-500 hover:underline cursor-pointer">
+              {{word.firstLanguage}}
             </h2>
             <p class="sentence-card-word mt-4 text-md text-gray-600">
               {{word.sentence}}
@@ -27,7 +27,7 @@
             </div>
           </div>
           <!-- <div class="flex">
-            <div v-for="i in word.turkish.length" :key="i" class="border-b-2 w-4 ml-2">
+            <div v-for="i in word.firstLanguage.length" :key="i" class="border-b-2 w-4 ml-2">
           </div> 
           </div>-->
           <div class="flex justify-between items-center">
@@ -83,7 +83,7 @@ export default {
       const compare = ()=>{
         store.state.showAnswer = true;  // show the answer
 
-        if(store.state.answer == props.word.turkish) {
+        if(store.state.answer == props.word.firstLanguage) {
           store.state.correct=true      //  open the true alert
           store.state.animatedStar=true;  // show the animated star
 

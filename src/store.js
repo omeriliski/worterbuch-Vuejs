@@ -19,10 +19,11 @@ function sortDataAZ(prop){
 const store = createStore({
     state: {
         wordList: ref([]),
-        tempCardList:ref([]),  
+        tempCardList:ref([]),
+        userSettings:({}),  
         user:null,
-        german:ref(""),
-        turkish:ref(""),
+        targetLanguage:ref(""),
+        firstLanguage:ref(""),
         sentence:ref(""),
         isDisabled:ref(""),
         isEditEnable:ref(true),
@@ -48,20 +49,27 @@ const store = createStore({
                     // console.log("Document data:", docSnap.data().wordList);
                     state.wordList = docSnap.data().wordList
                     state.tempCardList=[...state.wordList];     //!!!!!!!!!!!!!!!!!!!!!!added wordlist to tempCardList
+                    state.userSettings=docSnap.data().userSettings;
                     // console.log('state.tempCardList :>> ', state.tempCardList);
                   } else {
                     // doc.data() will be undefined in this case
                     console.log("No such document!");
                   }
             // }
-            state.wordList.sort(sortDataAZ("german"));
+            state.wordList.sort(sortDataAZ("targetLanguage"));
         },
         async saveWordData(state){
             const wordsRef = collection(db, "words");
             //wordsRef, doc Id, data Obj
             console.log('state.user :>> ', state.user);
             state.isDisabled="";
-            await setDoc(doc(wordsRef, `${state.user.uid}`),{wordList:state.wordList});
+
+            const auth = getAuth()
+            const data={
+                userSettings:state.userSettings,
+                wordList:state.wordList
+            }
+            await setDoc(doc(wordsRef, `${auth.currentUser.uid}`),data);
             state.isEditEnable=true;
         },
         sortWords(state,column){
