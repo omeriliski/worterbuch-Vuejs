@@ -47,7 +47,7 @@
                 {{word.sentence}}
               </td>
               <td class=" px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                
+                <i v-for="star in word.rating" :key="star.id" class="fas fa-star"></i>
               </td>
               <td @click="editWord(word)"   class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                 <button :class="$store.state.isDisabled" class="text-indigo-600 hover:text-indigo-900">Edit</button>

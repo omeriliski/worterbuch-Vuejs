@@ -14,9 +14,11 @@
             <p class="sentence-card-word mt-4 text-md text-gray-600">
               {{word.sentence}}
             </p>
-            <div class="flex justify-start items-start mt-3">
-              <div id="rating-card" class="rating-card mt-2 w-1/4"></div>
-              <div v-if="$store.state.wrong"  id="falseAlert" class="p-3 ml-10 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+            <div class="flex justify-between items-center">
+              <div id="rating-card" class="rating-card">
+                <Stars :word="word"/>
+              </div>
+              <div v-if="$store.state.wrong"  id="falseAlert" class="p-3 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
                 <span class="font-medium">Falsch!</span> <i class="far fa-frown text-xl ml-5"></i>
               </div>
               <div v-if="$store.state.correct" id="rightAlert" class="p-3 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
@@ -45,22 +47,70 @@
       </div>
     </div>
 </template>
-
 <script>
 import {useStore} from 'vuex';
+import Stars from "./stars.vue"; 
 export default {
     props:{word:Object, showAnswer:Boolean},
+    components:{Stars},
     setup(props){
-      
-      const {state} = useStore()
-      const compare = ()=>{
-        state.showAnswer = true;
-        console.log('props.showAnswer :>> ',state.showAnswer);
-        // console.log('showAntwort :>> ', showAnswer.value);
-        if(state.answer == props.word.turkish) state.correct=true
-        else state.wrong=true;
+      const store = useStore()
+
+      const deleteCardTemporarily=()=>{
+        setTimeout(() => {
+          store.state.answer="";      // clean the input box
+          store.state.tempCardList = store.state.tempCardList.filter(e => e.id !== props.word.id)   //delete the word temporarily 
+          console.log('store.state.tempCardList :>> ',store.state.tempCardList);
+          store.state.showAnswer = false;
+        },2000);
       }
-      //const showAnswer = computed(()=>props.showAnswer)
+      const changeRating=(arr, prozess)=>{
+         arr.forEach((e,index) => {   
+              // e.id==props.word.id ? e.rating++ :null
+              if(e.id==props.word.id){
+                if(prozess=="inc"){
+                  if(e.rating<=4) e.rating++    // increase the rating
+                }
+                else{
+                  if(e.rating>0) e.rating--     // decrease the rating
+                }
+                // prozess=="inc" & e.rating<=4 ? e.rating++ : e.rating --;    // increase or decrease the rating
+                arr.splice(index,1,e);   // update the word list
+              }
+            });
+      }
+
+      const compare = ()=>{
+        store.state.showAnswer = true;  // show the answer
+
+        if(store.state.answer == props.word.turkish) {
+          store.state.correct=true      //  open the true alert
+          store.state.animatedStar=true;  // show the animated star
+
+          setTimeout(() => {
+            changeRating(store.state.wordList,"inc")    //increase the rating in wordList
+            store.commit("saveWordData")        // save the wordlist
+            store.state.animatedStar=false;   // 2 seconds later hide the animated star
+          }, 2000);
+          setTimeout(() => {
+            deleteCardTemporarily()
+            store.state.correct=false;          // close the true alert 
+            
+          }, 2000);
+        }
+        else 
+        {
+          store.state.wrong=true;
+          
+          changeRating(store.state.wordList,"dec")    //increase the rating in wordList
+          store.commit("saveWordData")
+          deleteCardTemporarily()
+          setTimeout(() => {
+            store.state.wrong=false;
+          }, 2000);
+          
+        }
+      }
       return {compare}
     }
 }
@@ -71,8 +121,6 @@ export default {
   margin: 1rem;
 }
 .card{
-  /* margin: auto; */
-  /* width:100%; */
   height: 300px;
   padding: 1rem;
 }

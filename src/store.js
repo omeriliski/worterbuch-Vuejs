@@ -18,7 +18,8 @@ function sortDataAZ(prop){
 }
 const store = createStore({
     state: {
-        wordList: [],
+        wordList: ref([]),
+        tempCardList:ref([]),  
         user:null,
         german:ref(""),
         turkish:ref(""),
@@ -28,10 +29,12 @@ const store = createStore({
         showAnswer:ref(false),
         correct:ref(false),
         wrong:ref(false),
-        answer:ref("")
+        answer:ref(""),
+        animatedStar:ref(false)
     },
     getters: {
         wordList: state => state.wordList,
+        tempCardList: state => state.tempCardList,
     },
     mutations: {
         async getData(state) {
@@ -42,8 +45,10 @@ const store = createStore({
                 const docRef =  doc(db, "words",auth.currentUser.uid);
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
-                    console.log("Document data:", docSnap.data().wordList);
+                    // console.log("Document data:", docSnap.data().wordList);
                     state.wordList = docSnap.data().wordList
+                    state.tempCardList=[...state.wordList];     //!!!!!!!!!!!!!!!!!!!!!!added wordlist to tempCardList
+                    // console.log('state.tempCardList :>> ', state.tempCardList);
                   } else {
                     // doc.data() will be undefined in this case
                     console.log("No such document!");

@@ -3,7 +3,7 @@
         <Navbar class="w-full"/>
         <div class="card-wrapper xl:w-1/3 md:w-2/3 flex justify-between items-center">
             <img @click="getPreviousCard" class="arrow" src="../assets/left-arrow.png" alt="">
-            <Card class="card" :word="wordList[current]" :showAnswer="showAnswer"/>
+            <Card class="card" :word="tempCardList[current]" :showAnswer="showAnswer"/>
             <img @click="getNextCard" class="arrow" src="../assets/right-arrow.png" alt="">
         </div>
     </div>
@@ -23,25 +23,21 @@ export default {
         store.commit("getData")
         const getPreviousCard = ()=>{
             if(current.value>0) current.value--
-            store.state.showAnswer=false;
             store.state.correct=false;
             store.state.wrong=false;
-            store.state.answer="";
-            // console.log('current.value :>> ', current.value);
         }
         const getNextCard = ()=>{
-            if(current.value<store.getters.wordList.length-1) current.value++
-             store.state.showAnswer=false;
+            if(current.value<store.getters.tempCardList.length-1) current.value++
              store.state.correct=false;
              store.state.wrong=false;
-             store.state.answer="";
-            // console.log('wordList.length :>> ', store.getters.wordList.length-1);
-            // console.log('current.value :>> ', current.value);
         }
         const wordList=computed(()=>{ 
             return store.getters.wordList
-      })
-      return {wordList,current,getPreviousCard,getNextCard}
+        })
+        const tempCardList=computed(()=>{ 
+            return store.getters.tempCardList
+        })
+      return {wordList,tempCardList,current,getPreviousCard,getNextCard}
     }
 }
 </script>
