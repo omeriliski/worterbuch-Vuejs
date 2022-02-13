@@ -9,9 +9,21 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
-    path: '/check',
-    name: 'Check',
-    component: () => import('../views/Check.vue'),
+    path: '/wordList',
+    name: 'WordList',
+    component: () => import('../views/WordList.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/cards',
+    name: 'Cards',
+    component: () => import('../views/Cards.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/pool',
+    name: 'Pool',
+    component: () => import('../views/Pool.vue'),
     meta: { requiresAuth: true }
   },
   {

@@ -21,18 +21,18 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
               </th>
-              <th scope="col" class=" w-5/12 sentence px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th scope="col" class=" w-7/12 sentence px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Beispiel Satz
               </th>
-              <th scope="col" class="w-1/12 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <!-- <th scope="col" class="w-1/12 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Lernniveau
-              </th>
+              </th> -->
               <th scope="col" class=" w-1/12 px-6 py-3">
-                <span class="sr-only">Edit</span>
+                <span class="sr-only">Add</span>
               </th>
-              <th scope="col" class=" w-1/12 px-6 py-3">
+              <!-- <th scope="col" class=" w-1/12 px-6 py-3">
                 <span class="sr-only">Delete</span>
-              </th>
+              </th> -->
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
@@ -53,14 +53,8 @@
               <td class="sentence py-4">
                 {{word.sentence}}
               </td>
-              <td class=" px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                <i v-for="star in word.rating" :key="star.id" class="fas fa-star"></i>
-              </td>
-              <td @click="editWord(word)"   class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <button :class="$store.state.isDisabled" class="text-indigo-600 hover:text-indigo-900">Edit</button>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <button :class="$store.state.isDisabled" @click="deleteWord(word)" class="text-indigo-600 hover:text-indigo-900">Delete</button>
+              <td @click="addWordToWordList(word)"   class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <button :class="$store.state.isDisabled" class="text-indigo-600 hover:text-indigo-900">Add</button>
               </td>
             </tr>
             <!-- More people... -->
@@ -75,15 +69,32 @@
 <script>
 import { computed } from '@vue/runtime-core';
 import { useStore } from 'vuex';
+// import { isProxy, toRaw } from 'vue';
 export default {
   
   setup(){
     const store = useStore()
     
-    store.commit("getData") 
+    store.commit("getAllData")
+
+
     const wordList=computed(()=>{ 
-       return store.getters.wordList
-      })
+      const str=store.state.userSettings.firstLanguage+"To"+store.state.userSettings.targetLanguage;
+      
+      store.state.organizedWordList[str]= store.state.generalWordList.filter(item=>item.userSettings.firstLanguage==store.state.userSettings.firstLanguage && item.userSettings.targetLanguage==store.state.userSettings.targetLanguage)
+
+      const data = store.state.organizedWordList[str].map(e=>e.wordList)
+      const organizedWordList=[]
+      data.forEach(element => {
+        element.forEach(e => {
+          organizedWordList.push(e)
+        });
+      });
+      return organizedWordList;
+    })
+    const addWordToWordList=(word)=>{
+      store.commit("addWordFromGeneralWordListToWordList",word)
+    }
     const sortWords = (column) => {
       store.commit("sortWords",column)
     }
@@ -108,7 +119,7 @@ export default {
     // const editWord=(word)=>{
     //   emit("editWord",word)
     // }
-    return{wordList,sortWords,deleteWord,editWord}
+    return{wordList,addWordToWordList,sortWords,deleteWord,editWord}
   }
 }
 
