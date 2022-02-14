@@ -15,11 +15,11 @@
         <div class="flex-1 flex items-center justify-between sm:items-stretch sm:justify-start">
           <div class="flex-shrink-0 flex items-start">
             <!-- <img class="block lg:hidden h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow" /> -->
-            <img class="hidden lg:block h-10 w-auto" src="../assets/logo.png" alt="Workflow" />
+            <img class="hidden lg:block h-10 w-auto" src="../assets/logo.png" alt="Workflow"/>
           </div>
           <div class="hidden sm:block sm:ml-6">
             <div class="flex space-x-4">
-              <router-link v-for="item in navigation" :key="item.name" :to="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'px-3 py-2 rounded-md text-sm font-medium']" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</router-link>
+              <router-link @click="activateMenu(index)" v-for="(item,index) in navigation" :key="item.name" :to="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'px-3 py-2 rounded-md text-sm font-medium']" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</router-link>
             </div>
           </div>
         </div>
@@ -74,12 +74,8 @@ import { useAuthState } from '../firebase';
 import { getAuth, signOut } from 'firebase/auth'
 import { useRouter } from 'vue-router'
 import {useStore} from 'vuex';
-const navigation = [
-  { name: 'HomePage', href: '/', current: true },
-  { name: 'Word List', href: '/wordList', current: true },
-  { name: 'Cards', href: '/cards', current: false },
-  { name: 'Word Pool', href: '/pool', current: false }
-]
+import { computed } from '@vue/reactivity';
+
 
 export default {
   components: {
@@ -100,6 +96,15 @@ export default {
     store.state.user=user;
     const auth = getAuth()
     const router = useRouter()
+
+    const navigation=computed(()=>{
+      return store.getters.navigation;
+    })
+    const activateMenu=(index)=>{
+      console.log('navigation :>> ', navigation);
+      navigation.value.forEach(e=>e.current=false)
+      navigation.value[index].current=true;
+    }
     const signOutUser = async () => {
       try {
         await signOut(auth)
@@ -110,7 +115,7 @@ export default {
       }
     }
 
-    return { user, signOutUser,navigation,router }
+    return { user, signOutUser,navigation,router,activateMenu }
   },
 }
 </script>

@@ -48,12 +48,19 @@ const store = createStore({
         correct: ref(false),
         wrong: ref(false),
         answer: ref(""),
-        animatedStar: ref(false)
+        animatedStar: ref(false),
+        navigation : [
+            { name: 'HomePage', href: '/', current: true },
+            { name: 'Word List', href: '/wordList', current: false },
+            { name: 'Cards', href: '/cards', current: false },
+            { name: 'Word Pool', href: '/pool', current: false }
+          ]
     },
     getters: {
         wordList: state => state.wordList,
         tempCardList: state => state.tempCardList,
-        generalWordList: state => state.generalWordList
+        generalWordList: state => state.generalWordList,
+        navigation:state=>state.navigation
     },
     mutations: {
         async getAllData(state) {

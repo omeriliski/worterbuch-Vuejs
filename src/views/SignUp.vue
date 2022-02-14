@@ -39,9 +39,9 @@
           </div>
         </div>
           <div class="text-sm">
-            <a href="#" @click="signin" class="font-medium text-indigo-600 hover:text-indigo-500">
+            <router-link to="/login" class="font-medium text-indigo-600 hover:text-indigo-500">
               Sign in
-            </a>
+            </router-link>
           </div>
         <!-- <div class="flex items-center justify-between">
           <div class="flex items-center">
@@ -90,10 +90,7 @@ export default {
         alert(e.message)
       }
     }
-    const signin=()=>{
-      router.push('/login')
-    }
-    return { handleSubmit,signin }
+    return { handleSubmit }
   }
 }
 </script>

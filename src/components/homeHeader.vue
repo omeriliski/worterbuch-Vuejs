@@ -15,16 +15,17 @@
               Cumque debitis dignissimos id quam vel!
             </p>
             <div class="flex justify-center lg:justify-start mt-6">
-              <a
+              <router-link
+              @click="activateWordList"
                 class="px-4 py-3 bg-gray-900 text-gray-200 text-xs font-semibold rounded hover:bg-gray-800"
-                href="#"
-                >Get Started</a
-              >
+                to="/wordList"
+                >Get Started
+              </router-link>
               <a
                 class="mx-4 px-4 py-3 bg-gray-300 text-gray-900 text-xs font-semibold rounded hover:bg-gray-400"
-                href="#"
-                >Learn More</a
-              >
+                href="#section2"
+                >Learn More
+              </a>
             </div>
           </div>
         </div>
@@ -42,6 +43,23 @@
     </div>
 </template>
 
+
+<script>
+import {useStore} from 'vuex'
+export default {
+    setup() {
+        const store = useStore();
+        const activateWordList=()=>{
+            store.getters.navigation.forEach(element => {
+                element.current=false;
+            });
+            store.getters.navigation[1].current="true";
+        }
+        return {activateWordList}
+        
+    }
+}
+</script>
 <style>
     .topImage{
         background-image: url("../assets/home/3.jpg");
