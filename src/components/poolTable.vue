@@ -3,7 +3,7 @@
 <div class=" flex flex-col mt-10">
   <div class="-my-2 flex justify-center">
     <div class="w-11/12 py-2 align-middle inline-block  sm:px-6 lg:px-4">
-      <div class="tableDiv shadow overflow-y-auto border-b border-gray-200 sm:rounded-lg">
+      <div class="poolTableDiv shadow overflow-y-auto border-b border-gray-200 sm:rounded-lg">
         <table class="divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
@@ -53,7 +53,7 @@
               <td class="sentence py-4">
                 {{word.sentence}}
               </td>
-              <td @click="addWordToWordList(word)"   class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+              <td @click="addWordToWordList(word)"  class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                 <button :class="$store.state.isDisabled" class="text-indigo-600 hover:text-indigo-900">Add</button>
               </td>
             </tr>
@@ -92,46 +92,25 @@ export default {
       });
       return organizedWordList;
     })
-    const addWordToWordList=(word)=>{
-      store.commit("addWordFromGeneralWordListToWordList",word)
+    const addWordToWordList=(wordToAdd)=>{
+      store.commit("addWordFromGeneralWordListToWordList",wordToAdd)
     }
     const sortWords = (column) => {
       store.commit("sortWords",column)
     }
-    const deleteWord=(word)=>{
-      if(store.state.isEditEnable==true){
-        console.log('store.state.wordList :>> ', store.state.wordList);
-        store.state.wordList = store.getters.wordList.filter((e)=>e.id!=word.id)
-        store.commit("saveWordData");
-      }
-    }
-    const editWord=(word=>{
-      if(store.state.isEditEnable==true){
-        store.state.targetLanguage=word.targetLanguage;
-        store.state.firstLanguage=word.firstLanguage;
-        store.state.sentence=word.sentence;
-        store.state.isDisabled="disabled-link";
-        store.state.wordList = store.getters.wordList.filter((e)=>e.id!=word.id)
-        store.state.isEditEnable=false;
-      }
-    })
-    // to send this emit to the parent (home) component
-    // const editWord=(word)=>{
-    //   emit("editWord",word)
-    // }
-    return{wordList,addWordToWordList,sortWords,deleteWord,editWord}
+  
+    return{wordList,addWordToWordList,sortWords,}
   }
 }
 
 </script>
 
 <style>
-  .tableDiv{
-    height: 70vh;
+  .poolTableDiv{
+    height: 85vh;
   }
   .table-wrapper {
     width: 50vw;
-    background: red;
   }
   .disabled-link{
     color: #ddd;

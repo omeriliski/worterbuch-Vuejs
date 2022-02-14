@@ -116,11 +116,10 @@ export default {
 
 <style>
   .tableDiv{
-    height: 70vh;
+    height: 75vh;
   }
   .table-wrapper {
     width: 50vw;
-    background: red;
   }
   .disabled-link{
     color: #ddd;

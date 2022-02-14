@@ -2,7 +2,6 @@
     <div>
         <Navbar/>
         <PoolTable/>
-        Pool
     </div>
 </template>
 
