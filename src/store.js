@@ -118,7 +118,11 @@ const store = createStore({
         },
         sortWords(state, column) {
             state.wordList.sort(sortDataAZ(column));
-        }
+        },
+        activateMenu(state,index){
+            state.navigation.forEach(e=>e.current=false)
+            state.navigation[index].current=true;
+          }
 
     },
 })

@@ -48,6 +48,7 @@
 
           <router-link 
             to="/wordList"
+            @click="activateMenu(1)"
             class="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:underline hover:text-blue-600 dark:hover:text-blue-500"
           >
             <svg
@@ -97,6 +98,7 @@
           </p>
 
           <router-link
+            @click="activateMenu(2)"
             to="/cards"
             class="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:underline hover:text-blue-600 dark:hover:text-blue-500"
           >
@@ -148,6 +150,7 @@
           </p>
 
           <router-link
+            @click="activateMenu(3)"
             to="/pool"
             class="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:underline hover:text-blue-600 dark:hover:text-blue-500"
           >
@@ -175,11 +178,15 @@
 
 <script>
 import { useRouter } from 'vue-router'
+import {useStore} from 'vuex'
 export default {
     setup() {
+        const store = useStore();
         const router=useRouter();
-    
-        return {router}
+        const activateMenu = (index)=>{
+            store.commit("activateMenu",index)
+        }
+        return {router,activateMenu}
     }
 }
 </script>

@@ -50,10 +50,7 @@ export default {
     setup() {
         const store = useStore();
         const activateWordList=()=>{
-            store.getters.navigation.forEach(element => {
-                element.current=false;
-            });
-            store.getters.navigation[1].current="true";
+            store.commit("activateMenu",1)
         }
         return {activateWordList}
         

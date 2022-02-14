@@ -79,7 +79,7 @@
         </div>
 
         <div>
-          <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          <button @click="activateMenu" type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             <span class="absolute left-0 inset-y-0 flex items-center pl-3">
               <LockClosedIcon class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
             </span>
@@ -98,7 +98,7 @@
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'vue-router'
 import { LockClosedIcon } from '@heroicons/vue/solid'
-// import {useStore} from 'vuex';
+import {useStore} from 'vuex';
 export default {
   components: {
     LockClosedIcon,
@@ -106,19 +106,23 @@ export default {
   setup() {
     const auth = getAuth()
     const router = useRouter()
-    // const store = useStore()
+    const store = useStore()
+    
+    const activateMenu=()=>{
+      store.commit("activateMenu",0)
+    }
+
     const handleSubmit = e => {
       const { email, password } = e.target.elements
       signInWithEmailAndPassword(auth, email.value, password.value)
         .then(()=>{
-          //store.state.user=auth.currentUser;
           router.push('/')
         })
         .catch (e=>{
           alert(e.message)
       }) 
     }
-    return { handleSubmit }
+    return { handleSubmit,activateMenu }
   }
 }
 </script>
