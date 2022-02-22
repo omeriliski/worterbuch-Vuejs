@@ -1,5 +1,6 @@
 <template>
-    <div id="card-wrapper" >
+    <div id="card-wrapper" >      
+      <div class=".test"></div>
       <div class="card bg-white max-w-xl rounded-2xl px-10 py-5 shadow-lg hover:shadow-2xl transition duration-500 ">
         <div class="mt-4 flex flex-col h-full justify-between">
           <div>
@@ -48,14 +49,16 @@
     </div>
 </template>
 <script>
+
+
+
 import {useStore} from 'vuex';
-import Stars from "./stars.vue"; 
+import Stars from "./stars.vue";
 export default {
     props:{word:Object, showAnswer:Boolean},
     components:{Stars},
     setup(props){
       const store = useStore()
-
       const deleteCardTemporarily=()=>{
         setTimeout(() => {
           store.state.answer="";      // clean the input box
@@ -122,9 +125,41 @@ export default {
 }
 .card{
   height: 300px;
+  width: 100%;
   padding: 1rem;
 }
 #input{ 
   z-index: 10;
 }
+
+/* .container {
+  width: 500px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+} */
+
+.container button {
+  cursor: pointer;
+}
+
+/* .slide {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  background-color: var(--red);
+  color: var(--white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  line-height: 22px;
+  font-family: Inter, sans-serif;
+  font-weight: 700;
+  position: absolute;
+  top: 0;
+  left: 0;
+} */
 </style>
