@@ -68,13 +68,13 @@ export default {
       if (current.value > 0) current.value--
       store.state.correct = false
       store.state.wrong = false
-      coordinate.value = 100
+      coordinate.value = 200
     }
     const getNextCard = () => {
       if (current.value < store.getters.tempCardList.length - 1) current.value++
       store.state.correct = false
       store.state.wrong = false
-      coordinate.value = -100
+      coordinate.value = -200
     }
     const wordList = computed(() => {
       return store.getters.wordList
@@ -99,7 +99,7 @@ export default {
 .card-wrapper {
   margin: auto;
   /* border:1px solid red; */
-  height: 93vh;
+  height: 77.5vh;
 
 }
 .card{
