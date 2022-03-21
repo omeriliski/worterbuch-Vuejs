@@ -5,8 +5,7 @@
   "scripts": {
     "watch": "npx tailwindcss -i ./src/assets/input.css -o ./public/output.css --watch",
     "start": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "postinstall": "ng build",
+    "build": "rpm run build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
