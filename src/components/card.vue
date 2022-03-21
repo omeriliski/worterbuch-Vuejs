@@ -65,7 +65,7 @@ export default {
           store.state.tempCardList = store.state.tempCardList.filter(e => e.id !== props.word.id)   //delete the word temporarily 
           console.log('store.state.tempCardList :>> ',store.state.tempCardList);
           store.state.showAnswer = false;
-        },2000);
+        },4000);
       }
       const changeRating=(arr, prozess)=>{
          arr.forEach((e,index) => {   

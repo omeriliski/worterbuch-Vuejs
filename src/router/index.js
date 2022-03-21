@@ -64,7 +64,7 @@ router.beforeEach(async (to, from, next) => {
   const isAuth = await getUserState()
 
   if (requiresAuth && !isAuth) next('/login')
-  else if (requiresUnauth && isAuth) next('/')
+  else if (requiresUnauth && isAuth) next('/home')
   else next()
 })
 
